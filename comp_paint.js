@@ -13,25 +13,25 @@ function Brush(name, iconPath) {
 	this.name = name;
 	this.iconPath = iconPath;
 }
-Brush.prototype.setup = function(){}; // called when the appliation loads
-Brush.prototype.activate = function(){}; // called when the user picks this brush
-Brush.prototype.draw = function(){};
-Brush.prototype.mouseMoved = function(){};
-Brush.prototype.mouseDragged = function(){};
-Brush.prototype.mousePressed = function(){};
-Brush.prototype.mouseReleased = function(){};
-Brush.prototype.mouseClicked = function(){};
-Brush.prototype.mouseWheel = function(){};
-Brush.prototype.keyPressed = function(){};
-Brush.prototype.keyReleased = function(){};
-Brush.prototype.keyTyped = function(){};
+Brush.prototype.setup = function() {}; // called when the appliation loads
+Brush.prototype.activate = function() {}; // called when the user picks this brush
+Brush.prototype.draw = function() {};
+Brush.prototype.mouseMoved = function() {};
+Brush.prototype.mouseDragged = function() {};
+Brush.prototype.mousePressed = function() {};
+Brush.prototype.mouseReleased = function() {};
+Brush.prototype.mouseClicked = function() {};
+Brush.prototype.mouseWheel = function() {};
+Brush.prototype.keyPressed = function() {};
+Brush.prototype.keyReleased = function() {};
+Brush.prototype.keyTyped = function() {};
 
 
 ////////////////////////////////////////////////////////////////////
 // State Variables
 
 var brushes = [];
-var currentBrush; 
+var currentBrush;
 var forecolor;
 
 
@@ -43,18 +43,18 @@ function setup() {
 	// initial state setup
 	background(255);
 	cursor(CROSS);
-	
+
 	// initialize brushes and add toolbar buttons
-	brushes.forEach( function(brush) {
+	brushes.forEach(function(brush) {
 		brush.setup();
 
 		// create the html elements for the brush's button
-		var li = $('<li><button><img src="'+brush.iconPath+'"></button></li>');
+		var li = $('<li><button><img src="' + brush.iconPath + '"></button></li>');
 		var b = li.find("button");
 		brush.button = b;
 
 		// add a function to handle button click
-		b.click( function() { 
+		b.click(function() {
 			currentBrush = brush;
 			currentBrush.activate();
 			$(this).addClass("active").siblings().removeClass("active");
@@ -66,14 +66,14 @@ function setup() {
 
 
 	// simulate a click on a brush to activate an initial brush
-	brushes[0].button.click();
+	brushes[5].button.click();
 
 
 	// pick an inital forecolor and create a color picker widget
-	forecolor = color(0,0,0);
+	forecolor = color(0, 0, 0);
 	var colorPicker = $('<input id="color-picker" type="color">');
 	$(".brushes").append(colorPicker);
-	colorPicker.change( function() {
+	colorPicker.change(function() {
 		forecolor = color($(this).val());
 	});
 
